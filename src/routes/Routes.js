@@ -5,8 +5,8 @@ import {
     Switch,
 } from 'react-router-dom';
 
-import Employees from '../components/Employees/Employees';
-import NavBar from '../components/NavBar/NavBar';
+import Employees from '../components/employees/Employees';
+import NavBar from '../components/navBar/NavBar';
 import Home from '../components/home/Home';
 import Setting from '../components/setting/Setting';
 
