@@ -25,9 +25,10 @@ export const Routes = () => {
                     <Setting />
                 </Route>
 
-                <Route>
-                    <Home path="/Employees" />
+                <Route path="/">
+                    <Home />
                 </Route>
+
             </Switch>
         </Router>
     )

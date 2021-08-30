@@ -13,6 +13,9 @@ import { connect } from 'react-redux';
 import { actions } from '../../redux/actions';
 import TranslateMenu from './TranslateMenu';
 import logo from '../../assets/logo.png';
+import DrawerUploadImage from '../uploadImage/DrawerUploadImage';
+import Avatar from '@material-ui/core/Avatar';
+import { TrafficRounded } from '@material-ui/icons';
 
 function PrimarySearchAppBar(props) {
 
@@ -21,7 +24,10 @@ function PrimarySearchAppBar(props) {
     } = useTranslation();
 
     const {
-        _setOpenDrawer
+        _setOpenDrawer,
+        _uploadedUrl,
+        _setOpenDrawerUploadImage,
+        _base64
     } = props;
 
     const classes = useStyles();
@@ -51,6 +57,7 @@ function PrimarySearchAppBar(props) {
     return (
         <>
             <Drawer />
+            <DrawerUploadImage />
             <div className={classes.grow}>
                 <AppBar position="static">
                     <Toolbar>
@@ -76,6 +83,16 @@ function PrimarySearchAppBar(props) {
                                 aria-label="account of current user"
                                 aria-controls={menuId}
                                 aria-haspopup="true"
+                                onClick={() => _setOpenDrawerUploadImage(TrafficRounded)}
+                                color="inherit"
+                            >
+                                <Avatar alt="Remy Sharp" src={_uploadedUrl ? _uploadedUrl : _base64} />
+                            </IconButton>
+                            <IconButton
+                                edge="end"
+                                aria-label="account of current user"
+                                aria-controls={menuId}
+                                aria-haspopup="true"
                                 onClick={handleProfileMenuOpen}
                                 color="inherit"
                             >
@@ -83,6 +100,8 @@ function PrimarySearchAppBar(props) {
                                     <Language />
                                 </Badge>
                             </IconButton>
+
+
                         </div>
                     </Toolbar>
                 </AppBar>
@@ -94,11 +113,14 @@ function PrimarySearchAppBar(props) {
 
 const mapStateToProps = state => ({
     ...state,
-    _openDrawer: state.nav.openDrawer
+    _openDrawer: state.nav.openDrawer,
+    _uploadedUrl: state.nav.uploadedUrl,
+    _base64: state.nav.base64
 })
 
 const mapDispatchToProps = dispatch => ({
-    _setOpenDrawer: (style) => dispatch(actions.setOpenDrawer(style)),
+    _setOpenDrawer: (open) => dispatch(actions.setOpenDrawer(open)),
+    _setOpenDrawerUploadImage: (open) => dispatch(actions.setOpenDrawerUploadImage(open))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PrimarySearchAppBar)
